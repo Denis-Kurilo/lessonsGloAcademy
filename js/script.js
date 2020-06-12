@@ -1,4 +1,3 @@
-
 let isNumber = function(n){
 	return !isNaN(parseFloat(n)) && isFinite(n);
 };
@@ -8,24 +7,22 @@ let	income = 'фриланс',
 	addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую'),
 	deposit = confirm('Есть ли у вас депозит в банке?'),
 	mission = 500000,
-	expenses = [];
-
+	expenses = [],
+	expensesAmount = getExpensesMonth(),
+	accumulatedMonth = getAccumulatedMonth(),
+	budgetDay = Math.floor(accumulatedMonth / 30);
 
 function start(){
 	do{
 		money = +prompt('Ваш месячный доход?');
 	}while(!isNumber(money))
 };
-start();
-let expensesAmount = getExpensesMonth();
-let accumulatedMonth = getAccumulatedMonth();
-let budgetDay = Math.floor(accumulatedMonth / 30);
 
-let showTypeOf = function(data){
+function showTypeOf(data){
 	console.log(data, typeof(data))
 };
 
-let getStatusIncome = function(){
+function getStatusIncome(){
 	if(budgetDay >= 1200){
 		return ('У вас высокий уровень дохода');
 	} else if (budgetDay >= 600 && budgetDay < 1200){
@@ -52,6 +49,7 @@ function getExpensesMonth(){
 };
 
 function getAccumulatedMonth() {
+	start();
 	return money - expensesAmount;
 }
 
