@@ -8,15 +8,16 @@ let	income = 'фриланс',
 	deposit = confirm('Есть ли у вас депозит в банке?'),
 	mission = 500000,
 	expenses = [],
-	expensesAmount = getExpensesMonth(),
-	accumulatedMonth = getAccumulatedMonth(),
-	budgetDay = Math.floor(accumulatedMonth / 30);
+	expensesAmount,
+	accumulatedMonth,
+	budgetDay;
 
 function start(){
 	do{
 		money = +prompt('Ваш месячный доход?');
 	}while(!isNumber(money))
 };
+start();
 
 function showTypeOf(data){
 	console.log(data, typeof(data))
@@ -44,14 +45,16 @@ function getExpensesMonth(){
 		}while(!isNumber(cost));
 		sum += cost;
 	}
-	return sum;
 	console.log(expenses);
+	return sum;
 };
+expensesAmount = getExpensesMonth();
 
 function getAccumulatedMonth() {
-	start();
 	return money - expensesAmount;
 }
+accumulatedMonth = getAccumulatedMonth();
+budgetDay = Math.floor(accumulatedMonth / 30);
 
 function getTargetMonth(){
 	 return Math.ceil(mission / accumulatedMonth);	 
