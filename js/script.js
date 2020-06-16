@@ -1,28 +1,27 @@
-let number,
-  count = 10;
-
 function randomInteger(min, max) {
-    return  Math.floor(Math.random() * (max - min)) + 1 
-    };
-number = randomInteger(1,100);
+    return function(){
+       return Math.floor(Math.random() * (max - min)) + 1;
+
+    }  
+};
+let userRandom = randomInteger(1,100);
+let userRun = userRandom();
+
+// console.log(userRun)
 
 function guessNum() {
-     let num;
+    let num;
 
-// console.log(number)
-     num = +prompt('Угадайте число от 1 до 100');
-     if(count == 1) {
-          return;
-     }
-     count--;
+    num = +prompt('Угадайте число от 1 до 100');
 
-     if (num == number) {
+     if (num == userRun) {
         alert('вы угадали! ');
-     } else if (num > number && num != '') {
-        alert('Вы ввели число больше! Осталось попыток: ' + count);
+        window.location.reload();
+     } else if (num > userRun && num != '') {
+        alert('Вы ввели число больше!' );
         guessNum();
-     }else if (num < number && num != '') {
-        alert('Вы ввели число меньше! Осталось попыток: ' + count);
+     }else if (num < userRun && num != '') {
+        alert('Вы ввели число меньше!');
         guessNum();
      } else if (isNaN(parseFloat(num) && isFinite(num))) {
         alert('Введите число');
