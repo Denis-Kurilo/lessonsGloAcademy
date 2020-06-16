@@ -1,33 +1,29 @@
-function randomInteger(min, max) {
-    return function(){
-       return Math.floor(Math.random() * (max - min)) + 1;
+const game = function(){
+    let min = 0;
+    let max = 10
 
-    }  
-};
-let userRandom = randomInteger(1,100);
-let userRun = userRandom();
-
-// console.log(userRun)
-
-function guessNum() {
-    let num;
-
-    num = +prompt('Угадайте число от 1 до 100');
-
-     if (num == userRun) {
-        alert('вы угадали! ');
-        window.location.reload();
-     } else if (num > userRun && num != '') {
-        alert('Вы ввели число больше!' );
-        guessNum();
-     }else if (num < userRun && num != '') {
-        alert('Вы ввели число меньше!');
-        guessNum();
-     } else if (isNaN(parseFloat(num) && isFinite(num))) {
-        alert('Введите число');
-        guessNum();
-     }else{
-       alert('Завершить игру')
-     }
-}
-guessNum();
+    let rundomNum = Math.floor(Math.random() * (max - min)) + 1;
+    // console.log(rundomNum)
+    
+    return function guessNum() {
+        let num = +prompt('Угадайте число от 1 до 100');
+         if (num == rundomNum) {
+            alert('вы угадали! ');
+            window.location.reload();
+         } else if (num > rundomNum && num != '') {
+            alert('Вы ввели число больше!' );
+            guessNum();
+         }else if (num < rundomNum && num != '') {
+            alert('Вы ввели число меньше!');
+            guessNum();
+         } else if (isNaN(parseFloat(num) && isFinite(num))) {
+            alert('Введите число');
+            guessNum();
+         }else{
+           alert('Завершить игру')
+         }
+        }
+         return guessNum();
+    }
+let startGame = game();
+startGame();
