@@ -88,6 +88,7 @@ if(appData.getTargetMonth() < 0 ){
   console.log('Будет достигнута цель ' + appData.getTargetMonth()); 
  }
 
-for(let key in addData){
-  console.log(`Ключ: ${key} Значение: ${addData[key]} `);
+console.log('Наша программа включает в себя данные:');
+for(let key in appData){
+  console.log(`Ключ: ${key} Значение: ${appData[key]} `);
 }
