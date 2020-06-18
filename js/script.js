@@ -4,10 +4,10 @@ let isNumber = function(n){
 let money;
 function start(){
   do{
-    appData.budget = +prompt('Ваш месячный доход?');
-  }while(!isNumber(appData.budget))
+    money = +prompt('Ваш месячный доход?');
+  }while(!isNumber(money))
 };
-
+start();
 let appData = {
   income: {}, 
   addIncome: [], 
@@ -21,6 +21,12 @@ let appData = {
   budgetMonth: 0,
   expensesMonth: 0,
   asking: function(){
+
+    let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
+    appData.addExpenses = addExpenses.toLowerCase().split(', ');
+    
+    appData.deposit = confirm('Есть ли у вас депозит в банке?'); 
+
     let cost;
     for (let i = 0; i < 2; i++){
       let itemOfExpenditure;
@@ -31,13 +37,9 @@ let appData = {
       }while(!isNumber(cost));
         appData.expenses[itemOfExpenditure] = cost; 
     }
-    console.log(appData.expenses);
 
-    let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
-    appData.addExpenses = addExpenses.toLowerCase().split(', ');
-    appData.deposit = confirm('Есть ли у вас депозит в банке?');   
     this.expensesMonth += this.getExpensesMonth();
-    console.log(`Сумму всех обязательных расходов ${this.expensesMonth}`);
+    this.budgetMonth += this.getBudget();
   },
   getExpensesMonth: function(){
     let arr = [], num;
@@ -49,13 +51,11 @@ let appData = {
     for (let i = 0; i < arr.length; i++) {
       sum += arr[i];
     };
-    
     return sum;
   },
 
   getBudget: function(){
-    return appData.budgetMonth = appData.budget - appData.expensesMonth;
-    return appData.budgetMonth - appData.budgetDay;
+    return appData.budget - appData.expensesMonth;
   },
   getTargetMonth: function(){
     return Math.ceil(appData.mission / appData.getBudget()); 
@@ -72,14 +72,13 @@ let appData = {
     } 
   }
 };
-
 appData.asking();
-start();
-
 appData.budgetDay = Math.floor(appData.getBudget() / 30);
 
-console.log('Расходы за месяц', appData.expensesMonth);
 console.log('Ваш бюджет ', appData.budget);
+console.log(appData.addExpenses + ' - Возможные рассходы');
+console.log(appData.deposit + ' - Есть ли у вас депозит в банке?')
+console.log(`Сумму всех обязательных расходов ${appData.expensesMonth}`);
 console.log('Накопления за месяц ', appData.getBudget());
 console.log(appData.getStatusIncome());
 if(appData.getTargetMonth() < 0 ){
@@ -87,7 +86,7 @@ if(appData.getTargetMonth() < 0 ){
  } else {
   console.log('Будет достигнута цель ' + appData.getTargetMonth()); 
  }
-
+console.log(appData);
 console.log('Наша программа включает в себя данные:');
 for(let key in appData){
   console.log(`Ключ: ${key} Значение: ${appData[key]} `);
