@@ -1,6 +1,5 @@
 const books = document.querySelectorAll('.book'),
 	adv = document.querySelector('.adv'),
-	book4 = books[4].querySelector('h2 a'),
 	book6 = books[2].querySelector('ul');
 
 
