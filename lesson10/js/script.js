@@ -1,5 +1,6 @@
 const books = document.querySelectorAll('.book'),
 	adv = document.querySelector('.adv'),
+	book4 = books[4].querySelector('h2 a'),
 	book6 = books[2].querySelector('ul');
 
 
@@ -13,12 +14,9 @@ books[2].before(books[5]);
 
 adv.remove();
 document.body.style.backgroundImage = "url(./image/adv.jpg)";
-
 const newElemh2 = document.createElement('h2'); 
 books[4].prepend(newElemh2); 
-const newElemLink = document.createElement('a'); 
-newElemLink.textContent = 'Книга 3. this и Прототипы Объектов';
-newElemh2.prepend(newElemLink); 
+newElemh2.innerHTML = '<a href="#">Книга 3. this и Прототипы Объектов</a>';
 
 //Глава 2
 let liBook2 = books[0].querySelectorAll('li');
@@ -36,6 +34,3 @@ liBook5[2].before(liBook5[4])
 
 //Глава 6
 book6.insertAdjacentHTML('beforeend','<li> Глава 8: За пределами ES6 </li>');
-
-
-
