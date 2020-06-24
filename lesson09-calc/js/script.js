@@ -52,7 +52,6 @@ let appData = {
     appData.getAddIncome();
     appData.getBudget();
     appData.showResult();
-    appData.asking();
   },
   showResult: function(){
     budgetMonthValue.value = appData.budgetMonth;
@@ -62,7 +61,7 @@ let appData = {
     additionalIncomeValue.value = appData.addIncome.join(', ');
     targetMonthValue.value = Math.ceil(appData.getTargetMonth());
     incomePeriodValue.value = appData.calcPeriod();
-    periodSelect.value = appData.getPeriod();
+    // periodSelect.value = appData.getPeriod();
     periodSelect.addEventListener('input', appData.dinamikCalkPeriod);
   },
   addExpensesBlock: function(){
@@ -123,12 +122,6 @@ let appData = {
       }
     })
   },
-  asking: function(){
-   /* function replacement(strAddExpenses) {
-      return strAddExpenses.replace(/(^|\s)\S/g, function(a) {return a.toUpperCase()})
-    }*/
-    appData.deposit = confirm('Есть ли у вас депозит в банке?'); 
-  },
   getExpensesMonth: function(){
     for (let key in appData.expenses) {
       appData.expensesMonth += +appData.expenses[key];
@@ -161,16 +154,16 @@ let appData = {
       appData.moneyDeposit = appData.validateNumber(this.moneyDeposit, 'Какой сумма заложена?');
     }
   },
-  calcPeriod: function(){
+ calcPeriod: function(){
     return appData.budgetMonth * periodSelect.value;
   },
-  getPeriod: function(){
+   getPeriod: function(){
     appData.period = +event.target.value;
     periodAmount.innerHTML = periodSelect.value;
   },
   dinamikCalkPeriod: function(){
-    let = incomePeriodVal = salaryAmount.value;
-    incomePeriodValue.value = appData.period * incomePeriodVal;
+    // let = incomePeriodVal = salaryAmount.value;
+    incomePeriodValue.value = appData.period * (appData.budget - appData.expensesMonth);
   },
   validateNumber: function(name, text){
      while (!isNumber(name)) {
