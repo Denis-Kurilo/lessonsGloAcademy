@@ -42,17 +42,34 @@ let appData = {
   budgetMonth: 0,
   expensesMonth: 0,
   start: function(){
+<<<<<<< HEAD
     appData.budget = +salaryAmount.value;
     appData.getPeriod();
     appData.getExpenses();
     appData.dinamikCalkPeriod();
     appData.getIncome();
+=======
+    if(salaryAmount.value === ''){
+      alert('Ошибка, поле "Месячный доход" должно быть заполненно!');
+      return;
+    };
+    appData.getPeriod();
+    appData.budget = +salaryAmount.value;
+    appData.getExpenses();
+    appData.getIncome();
+    appData.dinamikCalkPeriod();
+>>>>>>> 969daa6cab6937e2a916fc9044dcfbd5fee40bc0
     appData.getExpensesMonth();
     appData.getAddExpenses();
     appData.getAddIncome();
     appData.getBudget();
     appData.showResult();
     appData.asking();
+<<<<<<< HEAD
+=======
+    // appData.getInfoDeposit();
+
+>>>>>>> 969daa6cab6937e2a916fc9044dcfbd5fee40bc0
   },
   showResult: function(){
     budgetMonthValue.value = appData.budgetMonth;
@@ -63,7 +80,11 @@ let appData = {
     targetMonthValue.value = Math.ceil(appData.getTargetMonth());
     incomePeriodValue.value = appData.calcPeriod();
     periodSelect.value = appData.getPeriod();
+<<<<<<< HEAD
     periodSelect.addEventListener('input', appData.dinamikCalkPeriod);
+=======
+    periodSelect.addEventListener('input', dinamikCalkPeriod);
+>>>>>>> 969daa6cab6937e2a916fc9044dcfbd5fee40bc0
   },
   addExpensesBlock: function(){
     let cloneExpensesItem = expensesItems[0].cloneNode(true);
@@ -71,8 +92,40 @@ let appData = {
     expensesItems = document.querySelectorAll('.expenses-items');
     if(expensesItems.length === 3){
       btnPlus2.style.display = 'none';
+<<<<<<< HEAD
+=======
     }
 
+  },
+  addIncomeBlock: function(){
+    let cloneIncomeItem = incomeItems[0].cloneNode(true);
+    incomeItems[0].parentNode.insertBefore(cloneIncomeItem, btnPlus);
+    incomeItems = document.querySelectorAll('.income-items');
+    if(incomeItems.length === 3){
+      btnPlus.style.display = 'none';
+    }
+  },
+  getIncome: function(){
+    incomeItems.forEach(function(item){
+      let incomeTitle = item.querySelector('.income-title').value;
+      let incomeAmount = item.querySelector('.income-amount').value;
+
+      if( incomeTitle !== '' && incomeAmount !== ''){
+        appData.income[incomeTitle] = incomeAmount;
+      }
+    });
+
+    for(let key in appData.income){
+      appData.incomeMonth += +appData.income[key];
+>>>>>>> 969daa6cab6937e2a916fc9044dcfbd5fee40bc0
+    }
+  },
+  getExpenses: function(){
+    expensesItems.forEach(function(item){
+      let itemExpenses = item.querySelector('.expenses-title').value;
+      let cashExpenses = item.querySelector('.expenses-amount').value;
+
+<<<<<<< HEAD
   },
   addIncomeBlock: function(){
     let cloneIncomeItem = incomeItems[0].cloneNode(true);
@@ -100,6 +153,40 @@ let appData = {
     expensesItems.forEach(function(item){
       let itemExpenses = item.querySelector('.expenses-title').value;
       let cashExpenses = item.querySelector('.expenses-amount').value;
+=======
+      if(itemExpenses !== '' && cashExpenses !== ''){
+        appData.expenses[itemExpenses] = cashExpenses;
+      }
+    })
+  },
+  getAddExpenses: function(){
+    let addExpenses = additionalExpensesItem.value.split(',');
+    addExpenses.forEach(function(item){
+      item = item.trim(item);
+      if(item !== ''){
+        appData.addExpenses.push(item);
+      }
+    });
+
+    /*appData.addExpenses = addExpenses.toLowerCase().split(', ');
+    let strAddExpenses = appData.addExpenses.join(", ");
+    function replacement(strAddExpenses) {
+      return strAddExpenses.replace(/(^|\s)\S/g, function(a) {return a.toUpperCase()})
+    }*/
+  },
+  getAddIncome: function(){           //Возможный доход
+    additionalIncomeItem.forEach(function(item){
+      let itemValue = item.value.trim();
+      if(itemValue !== ''){
+        appData.addIncome.push(itemValue);
+      }
+    })
+  },
+  asking: function(){
+   /* function replacement(strAddExpenses) {
+      return strAddExpenses.replace(/(^|\s)\S/g, function(a) {return a.toUpperCase()})
+    }*/
+>>>>>>> 969daa6cab6937e2a916fc9044dcfbd5fee40bc0
 
       if(itemExpenses !== '' && cashExpenses !== ''){
         appData.expenses[itemExpenses] = cashExpenses;
@@ -167,11 +254,23 @@ let appData = {
   getPeriod: function(){
     appData.period = +event.target.value;
     periodAmount.innerHTML = periodSelect.value;
+<<<<<<< HEAD
   },
   dinamikCalkPeriod: function(){
     let = incomePeriodVal = salaryAmount.value;
     incomePeriodValue.value = appData.period * incomePeriodVal;
+=======
+    
+    /*
+
+    console.log()
+    // console.log(periodAmount)*/
+>>>>>>> 969daa6cab6937e2a916fc9044dcfbd5fee40bc0
   },
+  dinamikCalkPeriod: function(){
+    incomePeriodValue.innerHTML = periodSelect.value;
+  },
+
   validateNumber: function(name, text){
      while (!isNumber(name)) {
       if(isNumber(name)){
@@ -184,6 +283,7 @@ let appData = {
     return name;
   }
 };
+<<<<<<< HEAD
 
 let salaryAmountVal = salaryAmount.addEventListener('input', function(){
   if(salaryAmount.value.length > 0 && isNumber(salaryAmount.value)){
@@ -196,6 +296,10 @@ let salaryAmountVal = salaryAmount.addEventListener('input', function(){
     start.style.cursor = 'default';
   }
 })
+=======
+start.addEventListener('click', appData.start);
+
+>>>>>>> 969daa6cab6937e2a916fc9044dcfbd5fee40bc0
 
 btnPlus.addEventListener('click', appData.addIncomeBlock);
 btnPlus2.addEventListener('click', appData.addExpensesBlock);
@@ -218,5 +322,11 @@ console.log(appData.getStatusIncome());*/
 
 console.log(appData);
 
+<<<<<<< HEAD
 
 
+=======
+/*for(let key in appData){
+  console.log(`Ключ: ${key} Значение: ${appData[key]} `);
+}*/
+>>>>>>> 969daa6cab6937e2a916fc9044dcfbd5fee40bc0
