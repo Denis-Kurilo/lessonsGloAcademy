@@ -190,7 +190,6 @@ let appData = {
     start.style.display = "none";
   },
   reset: function(){
-    
     cancel.style.display = "block";
     cancel.addEventListener('click', function(){
       depositСheck.checked = false;
@@ -207,8 +206,8 @@ let appData = {
       objCopy.addExpenses = [];
       objCopy.addIncome = [];
       objCopy.expenses = {};
-      start.disabled = false;
-      
+
+      start.disabled = true;
       let input = document.querySelectorAll('input');
         input.forEach(function(item){
           item.value = '';
@@ -227,6 +226,11 @@ let changeBtn = appData.start.bind(appData);
 let salaryAmountVal = salaryAmount.addEventListener('input', function(){
   if(isNumber(salaryAmount.value)){
     start.addEventListener('click', startCalc);
+    if(salaryAmount.value.length == 0){
+        start.disabled = true;
+      }else{
+        start.disabled = false;
+      }
   }
 })
 
