@@ -1,6 +1,6 @@
 // `use strict`;
 let start = document.getElementById('start'),
-  cancel = document.getElementById('cancel');
+  cancel = document.getElementById('cancel'),
   btnPlus = document.getElementsByTagName('button')[0],
   btnPlus2 = document.getElementsByTagName('button')[1],
   additionalIncomeItem = document.querySelectorAll('.additional_income-item'),
