@@ -43,7 +43,7 @@ let appData = {
   budgetMonth: 0,
   expensesMonth: 0,
   start: function(){
-    console.log(this)
+    // console.log(this)
     this.budget = +salaryAmount.value;
     this.getPeriod();
     this.dinamikCalkPeriod();
@@ -193,24 +193,32 @@ let appData = {
     
     cancel.style.display = "block";
     cancel.addEventListener('click', function(){
-      let objCopy = JSON.parse(JSON.stringify(appData));
+      depositСheck.checked = false;
+
+      let objCopy = Object.assign({}, appData);
       objCopy = appData;
-      // console.log(objCopy)
-        for (let key in objCopy) {
-          
-        }
-        start.disabled = false;
-        
-        let input = document.querySelectorAll('input');
-          input.forEach(function(item){
-            item.value = '';
-            item.disabled = false;
-          });
-          periodSelect.value = 1;
-          periodAmount.innerHTML = 1;
-          start.style.display = "block";
-          cancel.style.display = "none"; 
+      objCopy.budget = 0;
+      objCopy.budgetDay = 0;
+      objCopy.budgetMonth = 0;
+      objCopy.incomeMonth = 0;
+      objCopy.expensesMonth = 0;
+      objCopy.period = 1;
+      objCopy.income = {};
+      objCopy.addExpenses = [];
+      objCopy.addIncome = [];
+      objCopy.expenses = {};
+      start.disabled = false;
+      
+      let input = document.querySelectorAll('input');
+        input.forEach(function(item){
+          item.value = '';
+          item.disabled = false;
         });
+        periodSelect.value = 1;
+        periodAmount.innerHTML = 1;
+        start.style.display = "block";
+        cancel.style.display = "none";
+      });
   }
 };
 let startCalc = appData.start.bind(appData);
