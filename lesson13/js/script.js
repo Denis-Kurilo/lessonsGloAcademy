@@ -42,7 +42,7 @@ let appData = {
   budgetMonth: 0,
   expensesMonth: 0,
   start: function(){
-    console.log(this)
+    // console.log(this)
     this.budget = +salaryAmount.value;
     this.getPeriod();
     this.dinamikCalkPeriod();
@@ -57,7 +57,6 @@ let appData = {
     this.changeBtn();
   },
   showResult: function(){
-    const _this = this;
     budgetMonthValue.value = this.budgetMonth;
     budgetDayValue.value = this.budgetDay;
     expensesMonthValue.value = this.expensesMonth;
@@ -116,7 +115,7 @@ let appData = {
       }
     }, this);
   },
-  getAddIncome: function(){           //Возможный доход
+  getAddIncome: function(){          
     additionalIncomeItem.forEach(function(item){
       let itemValueArr = item.value.trim();
       if(itemValueArr !== ''){
@@ -160,15 +159,12 @@ let appData = {
     return this.budgetMonth * periodSelect.value;
   },
   getPeriod: function(){
-
-    let target = +event.target.value;
-    this.period = target;
+    this.period = periodSelect.value;
     periodAmount.innerHTML = periodSelect.value;
   },
   dinamikCalkPeriod: function(){
-    let = incomePeriodVal = salaryAmount.value;
-    incomePeriodValue.value = this.period * (this.budget - this.expensesMonth);
-    return incomePeriodValue.value = this.period * this.budget;
+    let incomePeriodVal = periodSelect.value * budgetMonthValue.value;
+    incomePeriodValue.value = incomePeriodVal;
   },
   validateNumber: function(name, text){
     while (!isNumber(name)) {
@@ -183,7 +179,6 @@ let appData = {
   },
   noActivClickBtnStart: function(){
     start.disabled=true;
-    console.log(start)
     let input = document.querySelectorAll('input');
     input.forEach(function(item){
       if(start.disabled == true){
@@ -215,7 +210,6 @@ let appData = {
 let startCalc = appData.start.bind(appData);
 let changeBtn = appData.start.bind(appData);
 
-
 let salaryAmountVal = salaryAmount.addEventListener('input', function(){
   if(isNumber(salaryAmount.value)){
     start.addEventListener('click', startCalc);
@@ -228,7 +222,6 @@ btnPlus2.addEventListener('click', appData.addExpensesBlock);
 periodSelect.addEventListener('input', appData.getPeriod);
 
 
-
 // periodSelect.addEventListener('input', appData.dinamikCalkPeriod);
 /*if(appData.getTargetMonth() < 0 ){
   console.log('Цель не будет достигнута ' + appData.getTargetMonth());
@@ -236,14 +229,3 @@ periodSelect.addEventListener('input', appData.getPeriod);
   console.log('Будет достигнута цель ' + appData.getTargetMonth()); 
  }
 */
-
-
-/*console.log('Ваш бюджет ', appData.budget);
-console.log(appData.addExpenses + ' - Возможные рассходы');
-console.log(appData.deposit + ' - Есть ли у вас депозит в банке?')
-console.log(`Сумму всех обязательных расходов ${appData.expensesMonth}`);
-console.log('Накопления за месяц ', appData.getBudget());
-console.log(typeof appData.strAddExpenses);
-console.log(appData.getStatusIncome());*/
-
-// console.log(appData);
