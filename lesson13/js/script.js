@@ -1,5 +1,6 @@
 // `use strict`;
 let start = document.getElementById('start'),
+  cancel = document.getElementById('cancel');
   btnPlus = document.getElementsByTagName('button')[0],
   btnPlus2 = document.getElementsByTagName('button')[1],
   additionalIncomeItem = document.querySelectorAll('.additional_income-item'),
@@ -178,7 +179,7 @@ let appData = {
     return name;
   },
   noActivClickBtnStart: function(){
-    start.disabled=true;
+    start.disabled = true;
     let input = document.querySelectorAll('input');
     input.forEach(function(item){
       if(start.disabled == true){
@@ -189,34 +190,28 @@ let appData = {
     start.style.display = "none";
   },
   reset: function(){
-    let cancel = document.getElementById('cancel');
-      cancel.style.display = "block";
-
     
-
-
-    cancel.addEventListener('click', function(obj){
-      let objCopy = Object.assign({}, appData);
-      // appData = objCopy;
+    cancel.style.display = "block";
+    cancel.addEventListener('click', function(){
+      let objCopy = JSON.parse(JSON.stringify(appData));
       objCopy = appData;
-      console.log(objCopy)
+      // console.log(objCopy)
         for (let key in objCopy) {
-          objCopy[key] = 0;
+          
         }
         start.disabled = false;
         
         let input = document.querySelectorAll('input');
           input.forEach(function(item){
-            console.log(item)
             item.value = '';
             item.disabled = false;
           });
-          periodSelect.value = '1';
-          periodAmount.innerHTML = '1';
+          periodSelect.value = 1;
+          periodAmount.innerHTML = 1;
           start.style.display = "block";
           cancel.style.display = "none"; 
         });
-    }
+  }
 };
 let startCalc = appData.start.bind(appData);
 let changeBtn = appData.start.bind(appData);
