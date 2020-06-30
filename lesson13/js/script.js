@@ -42,7 +42,7 @@ let appData = {
   budgetMonth: 0,
   expensesMonth: 0,
   start: function(){
-    // console.log(this)
+    console.log(this)
     this.budget = +salaryAmount.value;
     this.getPeriod();
     this.dinamikCalkPeriod();
@@ -54,7 +54,7 @@ let appData = {
     this.getBudget();
     this.showResult();
     this.noActivClickBtnStart();
-    this.changeBtn();
+    this.reset();
   },
   showResult: function(){
     budgetMonthValue.value = this.budgetMonth;
@@ -188,25 +188,36 @@ let appData = {
     });
     start.style.display = "none";
   },
-  changeBtn: function(){
+  reset: function(){
     let cancel = document.getElementById('cancel');
-    cancel.addEventListener('click', function(e){
-      let target = e.target;
-      let input = document.querySelectorAll('input');
-      input.forEach(function(item){
-        console.dir(item)
-        item.value = '';
-        if(item.value == ''){
-          start.style.display = "block";
-          cancel.style.display = "none";
-          setTimeout(window.location.reload.bind(window.location), 1000);
+      cancel.style.display = "block";
+
+    
+
+
+    cancel.addEventListener('click', function(obj){
+      let objCopy = Object.assign({}, appData);
+      // appData = objCopy;
+      objCopy = appData;
+      console.log(objCopy)
+        for (let key in objCopy) {
+          objCopy[key] = 0;
         }
-      });
-    })
-        cancel.style.display = "block"; 
+        start.disabled = false;
+        
+        let input = document.querySelectorAll('input');
+          input.forEach(function(item){
+            console.log(item)
+            item.value = '';
+            item.disabled = false;
+          });
+          periodSelect.value = '1';
+          periodAmount.innerHTML = '1';
+          start.style.display = "block";
+          cancel.style.display = "none"; 
+        });
     }
 };
-
 let startCalc = appData.start.bind(appData);
 let changeBtn = appData.start.bind(appData);
 
@@ -229,3 +240,4 @@ periodSelect.addEventListener('input', appData.getPeriod);
   console.log('Будет достигнута цель ' + appData.getTargetMonth()); 
  }
 */
+
