@@ -1,4 +1,5 @@
 // `use strict`;
+let body = document.querySelector('body');
 function DomElement(selector, height, width, bg, fontSize){
   this.selector = selector;
   this.height = height;
@@ -25,9 +26,11 @@ DomElement.prototype.createsElement = function() {
 DomElement.prototype.createsElementStyle = function(teg) {
   teg.style.cssText = `height: ${this.height}px; width: ${this.width}px; background-color: ${this.bg}; font-size: ${this.fontSize}px;`
 }
+
 let element = new DomElement(prompt('Введите селектор'), prompt('высота'), prompt('ширина'), prompt('background'), prompt('размер текста'))
 
-console.dir(element)
 console.log(element.createsElement())
 
+let newElement = Object.create(DomElement); 
+console.log(newElement);
 
