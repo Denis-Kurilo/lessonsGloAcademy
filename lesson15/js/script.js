@@ -16,13 +16,14 @@ const start = document.getElementById('start'),
   salaryAmount = document.querySelector('.salary-amount'),
   incomeTitle = document.querySelector('.income-title'),
   expensesTitle = document.querySelector('.expenses-title'),
-  expensesItems = document.querySelectorAll('.expenses-items'),
   additionalExpenses = document.querySelector('.additional_expenses'),
   periodSelect = document.querySelector('.period-select'),
   additionalExpensesItem = document.querySelector('.additional_expenses-item'),
   targetAmount = document.querySelector('.target-amount'),
-  incomeItems = document.querySelectorAll('.income-items'),
   periodAmount = document.querySelector('.period-amount');
+
+  let expensesItems = document.querySelectorAll('.expenses-items'),
+    incomeItems = document.querySelectorAll('.income-items');
 
 const isNumber = function(n){
   return !isNaN(parseFloat(n)) && isFinite(n);
