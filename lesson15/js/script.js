@@ -49,8 +49,7 @@ class AppData {
     this.budget = +salaryAmount.value;
     this.getPeriod();
     this.dinamikCalkPeriod();
-    this.getExpenses();
-    this.getIncome();
+    this.getExpInc();
     this.getExpensesMonth();
     this.getAddExpenses();
     this.getAddIncome();
@@ -85,29 +84,23 @@ class AppData {
       btnPlus.style.display = 'none';
     }
   }
-  getIncome(){
-    incomeItems.forEach((item) =>{
-      const incomeTitle = item.querySelector('.income-title').value;
-      const incomeAmount = item.querySelector('.income-amount').value;
 
-      if( incomeTitle !== '' && incomeAmount !== ''){
-        this.income[incomeTitle] = incomeAmount;
-      }
-    });
-
-    for(let key in this.income){
-      this.incomeMonth += +this.income[key];
+  getExpInc(){
+  const count = (item) =>{
+    const startStr = item.className.split('-')[0]; 
+    const itemTitle = item.querySelector(`.${startStr}-title`).value;
+    const itemAmoun = item.querySelector(`.${startStr}-amount`).value;
+    if( itemTitle !== '' && itemAmoun !== ''){
+      this[startStr][itemTitle] = itemAmoun;
     }
   }
-  getExpenses(){
-    expensesItems.forEach((item) => {
-      const itemExpenses = item.querySelector('.expenses-title').value;
-      const cashExpenses = item.querySelector('.expenses-amount').value;
 
-      if(itemExpenses !== '' && cashExpenses !== ''){
-        this.expenses[itemExpenses] = cashExpenses;
-      }
-    })
+  incomeItems.forEach(count);
+  expensesItems.forEach(count);
+
+  for(let key in this.income){
+      this.incomeMonth += +this.income[key];
+    }
   }
   getAddExpenses(){
     const addExpenses = additionalExpensesItem.value.split(',');
