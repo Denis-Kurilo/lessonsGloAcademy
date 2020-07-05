@@ -57,7 +57,6 @@ class AppData {
     this.getAddExpenses();
     this.getAddIncome();
     this.getInfoDeposit();
-    this.validatePercent();
     this.getBudget();
     this.showResult();
     this.noActivClickBtnStart();
@@ -252,6 +251,7 @@ class AppData {
       depositAmount.value = '';
       this.deposit = false;
       depositBank.removeEventListener('change', this.changePercent);
+      depositPercent.removeEventListener('input', this.validatePercent);
     }
   }
   eventListeners(){
