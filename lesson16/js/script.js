@@ -49,6 +49,7 @@ class AppData {
     this.expensesMonth = 0;
   }
   start(){
+    console.log(this);
     this.budget = +salaryAmount.value;
     this.getPeriod();
     this.dinamikCalkPeriod();
@@ -189,7 +190,13 @@ class AppData {
   reset(){
     cancel.style.display = "block";
     cancel.addEventListener('click',() =>{
+
       depositСheck.checked = false;
+      if(depositСheck.checked == false){
+        depositBank.style.display = 'none';
+        depositAmount.style.display = 'none';
+      }
+      
 
       let objCopy = Object.assign({}, appData);
       objCopy = appData;
@@ -198,6 +205,9 @@ class AppData {
       objCopy.budgetMonth = 0;
       objCopy.incomeMonth = 0;
       objCopy.expensesMonth = 0;
+      objCopy.moneyDeposit = 0;
+      objCopy.percentDeposit = 0;
+      depositBank.value = '';
       objCopy.period = 1;
       objCopy.income = {};
       objCopy.addExpenses = [];
