@@ -21,58 +21,24 @@ window.addEventListener('DOMContentLoaded', function(){
 				timerHours.textContent = timer.hours;
 				timerMinutes.textContent = timer.minutes;
 				timerSeconds.textContent = timer.seconds;
+				if(timerHours.textContent < 10){
+				timerHours.textContent = `0${timer.hours}`;
+				}
+				if(timerMinutes.textContent < 10){
+					timerMinutes.textContent = `0${timer.minutes}`;
+				}
+				if(timerSeconds.textContent < 10){
+					timerSeconds.textContent = `0${timer.seconds}`;
+				}
 			} else if(timer.timeRemaining < 0){
 				timerHours.textContent = '00';
 				timerMinutes.textContent = '00';
 				timerSeconds.textContent = '00';
-			}
-
-			if(timerHours.textContent < 10){
-				timerHours.textContent = `0${timer.hours}`;
-			}
-			if(timerMinutes.textContent < 10){
-				timerMinutes.textContent = `0${timer.minutes}`;
-			}
-			if(timerSeconds.textContent < 10){
-				timerSeconds.textContent = `0${timer.seconds}`;
-			}
-
-
-
-				
-				
-			
-			
-
-			if(timer.timeRemaining > 0){
-				setTimeout(updateClock, 1000);
-			}else{
-				// clearInterval(updateClock);
-			}
-			
-			console.log(timer.timeRemaining)
-
+			}	
 		}
-	console.dir(updateClock)
-		
-			updateClock();
-		
-		/*	day = Math.floor(timeRemaining / 60 / 60 / 24);
-			console.log(day)*/
-			
+		setTimeout(updateClock, 1000);
+		setInterval(updateClock, 1000)
+		updateClock();		
 	}
-	// setInterval(countTimer, 1000, '10 july 2020');
-	countTimer('08 july 2020');
-	console.dir(countTimer)
-
-
-
-
-
-
-
-
-
-
-
+	countTimer('12 july 2020');
 });
