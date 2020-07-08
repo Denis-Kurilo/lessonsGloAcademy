@@ -109,12 +109,18 @@ window.addEventListener('DOMContentLoaded', function(){
 	togglePopUp();
 
 	//scroll-down
-	/*const scrollDown = () => {
+	const scrollDown = () => {
 		const scrollBtn = document.querySelector('main>a');
 		scrollBtn.addEventListener('click', (event) =>{
 			event.preventDefault();
+			const blockId = scrollBtn.getAttribute('href');
+
+			document.querySelector('' + blockId).scrollIntoView({
+				behavior: 'smooth',
+				block: 'start'
+			});
 			
 		});
 	}
-	scrollDown();*/
+	scrollDown();
 });
