@@ -110,17 +110,19 @@ window.addEventListener('DOMContentLoaded', function(){
 
 	//scroll-down
 	const scrollDown = () => {
-		const scrollBtn = document.querySelector('main>a');
-		scrollBtn.addEventListener('click', (event) =>{
-			event.preventDefault();
-			const blockId = scrollBtn.getAttribute('href');
+		const anchors = document.querySelectorAll('a[href*= "#"]');
+			for (let anchor of anchors){
+				anchor.addEventListener('click', (event) =>{
+					event.preventDefault();
+					const blockId = anchor.getAttribute('href');
 
-			document.querySelector('' + blockId).scrollIntoView({
-				behavior: 'smooth',
-				block: 'start'
-			});
-			
-		});
+					document.querySelector('' + blockId).scrollIntoView({
+						behavior: 'smooth',
+						block: 'start'
+					})
+				});
+			}
+		
 	}
 	scrollDown();
 });
