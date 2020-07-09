@@ -45,7 +45,6 @@ window.addEventListener('DOMContentLoaded', function(){
 	};
 	countTimer('12 july 2020');
 
-
 	//menu
 	const toggleMenu = () =>{
 		const btnMenu = document.querySelector('.menu'),
@@ -55,12 +54,17 @@ window.addEventListener('DOMContentLoaded', function(){
 		 menu.addEventListener('click', (event) =>{
 		 	event.preventDefault();
 		 	let target = event.target
-		 		if(target){
+		 
+		 		if(target.closest('li')){
+		 			menu.classList.toggle('active-menu');
+		 		}
+
+		 		if(target.closest('.close-btn')){
 		 			menu.classList.toggle('active-menu');
 		 		}
 		 });
 
-		 btnMenu.addEventListener('click', () =>{
+		 btnMenu.addEventListener('click', () => {
 		 	menu.classList.toggle('active-menu');
 		 });
 	};
