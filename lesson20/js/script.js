@@ -123,7 +123,7 @@ window.addEventListener('DOMContentLoaded', function(){
 
 	//scroll-down
 	const scrollDown = () => {
-		const anchors = document.querySelectorAll(`menu a[href^= "#"]`);
+		const anchors = document.querySelectorAll(`menu a[href^= "#"], main a[href^= "#"]`);
 			for (let anchor of anchors){
 				anchor.addEventListener('click', (event) =>{
 					event.preventDefault();
