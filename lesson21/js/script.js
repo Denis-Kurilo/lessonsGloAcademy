@@ -123,7 +123,7 @@ window.addEventListener('DOMContentLoaded', function(){
 
 	//scroll-down
 	const scrollDown = () => {
-		const anchors = document.querySelectorAll('a[href*= "#"]');
+		const anchors = document.querySelectorAll('menu a[href^= "#"], main a[href^= "#"]');
 			for (let anchor of anchors){
 				anchor.addEventListener('click', (event) =>{
 					event.preventDefault();
@@ -175,10 +175,19 @@ window.addEventListener('DOMContentLoaded', function(){
 		const slide = document.querySelectorAll('.portfolio-item'),
 			btn = document.querySelectorAll('.portfolio-btn'),
 			dot = document.querySelectorAll('.dot'),
+			portfolioDots = document.querySelector('.portfolio-dots'),
 			slider = document.querySelector('.portfolio-content');
 
 			let currentSlide = 0, //номер слайда
 				interval;
+
+			const addDots = () =>{
+				const newDot = document.createElement('li');
+				newDot.classList.add('dot');
+				newDot.classList.add('dot-active');
+				portfolioDots.append(newDot);
+			};
+			addDots();
 
 			const prevSlide = (elem, index, strClass) =>{
 				elem[index].classList.remove(strClass);
@@ -259,9 +268,8 @@ window.addEventListener('DOMContentLoaded', function(){
 				}
 			});
 
-			startSlide(2000);
+			startSlide(10000000);
 	};
-
 	slider();
 
 });
