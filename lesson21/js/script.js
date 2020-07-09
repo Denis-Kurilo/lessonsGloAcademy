@@ -172,9 +172,9 @@ window.addEventListener('DOMContentLoaded', function(){
 
 	//slider
 	const slider = () =>{
-		const slide = document.querySelectorAll('.portfolio-item'),
+		let slide = document.querySelectorAll('.portfolio-item'),
 			btn = document.querySelectorAll('.portfolio-btn'),
-			dot = document.querySelectorAll('.dot'),
+			// dot = document.querySelectorAll('.dot'),
 			portfolioDots = document.querySelector('.portfolio-dots'),
 			slider = document.querySelector('.portfolio-content');
 
@@ -182,10 +182,19 @@ window.addEventListener('DOMContentLoaded', function(){
 				interval;
 
 			const addDots = () =>{
-				const newDot = document.createElement('li');
-				newDot.classList.add('dot');
-				newDot.classList.add('dot-active');
-				portfolioDots.append(newDot);
+				for (let i = 0; i < slide.length; i++){
+					let newDot = document.createElement('li');
+					newDot.classList.add('dot');
+					// let btn = newDot.length + 1;
+					// newDot.classList.add('dot-active');
+
+					portfolioDots.append(newDot);
+					// portfolioDots[0].appendChild(newDot);
+
+				}
+				
+
+
 			};
 			addDots();
 
@@ -198,14 +207,15 @@ window.addEventListener('DOMContentLoaded', function(){
 			};
 
 			const autoPlaySlide = () =>{
+
 				prevSlide(slide, currentSlide, 'portfolio-item-active');
-				prevSlide(dot, currentSlide, 'dot-active');
+				prevSlide(newDot, currentSlide, 'dot-active');
 				currentSlide++;
 				if(currentSlide >= slide.length){
 					currentSlide = 0;
 				}
 				nextSlide(slide, currentSlide, 'portfolio-item-active');
-				nextSlide(dot, currentSlide, 'dot-active');
+				nextSlide(newDot, currentSlide, 'dot-active');
 			};
 
 			const startSlide = (time = 3000) =>{
@@ -227,14 +237,14 @@ window.addEventListener('DOMContentLoaded', function(){
 				}
 
 				prevSlide(slide, currentSlide, 'portfolio-item-active');
-				prevSlide(dot, currentSlide, 'dot-active');
+				prevSlide(newDot, currentSlide, 'dot-active');
 
 				if(target.matches('#arrow-right')){
 					currentSlide++;
 				}else if(target.matches('#arrow-left')){
 					currentSlide--;
 				} else if(target.matches('.dot')){
-						dot.forEach((elem, index) => {
+						newDot.forEach((elem, index) => {
 							if(elem === target){
 								currentSlide = index;
 							}
@@ -250,13 +260,14 @@ window.addEventListener('DOMContentLoaded', function(){
 				}
 
 				nextSlide(slide, currentSlide, 'portfolio-item-active');
-				nextSlide(dot, currentSlide, 'dot-active');
+				nextSlide(newDot, currentSlide, 'dot-active');
 
 			});
 
 			slider.addEventListener('mouseover', (event) =>{
 				if(event.target.matches('.portfolio-btn') ||  
-					event.target.matches('.dot')){
+					event.target.matches('.dot'))
+					{
 					stopSlide();
 				}
 			});
