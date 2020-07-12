@@ -171,24 +171,25 @@ window.addEventListener('DOMContentLoaded', function(){
 	tabs();
 
 	//slider
+	const addDots = () =>{
+		const slide = document.querySelectorAll('.portfolio-item'),
+			portfolioDots = document.querySelector('.portfolio-dots');
+		for (let i = 0; i < slide.length; i++){
+			let newDot = document.createElement('li');
+			newDot.classList.add('dot');
+			portfolioDots.append(newDot);
+		}
+	};
+	addDots();
 	const slider = () =>{
-		let slide = document.querySelectorAll('.portfolio-item'),
+		const slide = document.querySelectorAll('.portfolio-item'),
 			btn = document.querySelectorAll('.portfolio-btn'),
 			dot = document.querySelectorAll('.dot'),
 			portfolioDots = document.querySelector('.portfolio-dots'),
 			slider = document.querySelector('.portfolio-content');
 
-			let currentSlide = 0, //номер слайда
+			let currentSlide = 0,
 				interval;
-
-			const addDots = () =>{
-				for (let i = 0; i < slide.length; i++){
-					let newDot = document.createElement('li');
-					newDot.classList.add('dot');
-					portfolioDots.append(newDot);
-				}
-			};
-			addDots();
 
 		  const addActiveClass = () =>{
 				const dot = document.querySelectorAll('.dot');
@@ -225,7 +226,6 @@ window.addEventListener('DOMContentLoaded', function(){
 			const stopSlide = () =>{
 				clearInterval(interval);
 			};
-
 
 			slider.addEventListener('click', (event) => {
 				event.preventDefault();
@@ -279,7 +279,7 @@ window.addEventListener('DOMContentLoaded', function(){
 				}
 			});
 
-			startSlide(10000000);
+			startSlide(4000);
 	};
 	slider();
 
