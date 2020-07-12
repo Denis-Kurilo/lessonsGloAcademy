@@ -36,7 +36,6 @@ class Todo {
 	}
 	addTodo(e){	
 		e.preventDefault();
-		console.log(this)
 		if(this.input.value.trim()){
 			const newTodo = {
 				value: this.input.value, 
@@ -54,16 +53,21 @@ class Todo {
 		return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 	}
 
-	deleteItem(key, todoItem){
-		//Нужно будет по ключу найти элемент и удалить из new Map и после сделать render()
-		console.log('Удалить')
-		console.log(key)
+	deleteItem(key){
+		this.todoData.forEach((elem) => {
+			if(key === elem.key){
+				if(confirm('Удалить задачу?')){
+					this.todoData.delete(key);
+				}
+				this.addToStorage();
+				this.render();
+			}
+		});
 	}
 
 	complaetedItem(key){
 		this.todoData.forEach((elem) => {
-			while(key === elem.key){
-				console.log(key + ' === ' + elem.key)
+			if(key === elem.key){
 				if(elem.completed == true ){
 					elem.completed = false;
 				}else{
@@ -71,26 +75,23 @@ class Todo {
 				}
 				this.addToStorage();
 				this.render();
-				key++;
 			}
 		});
 	}
 
 	handler(){
-		const todoItem = document.querySelectorAll('.todo-item');
-		todoItem.forEach((elem) => {
-			elem.addEventListener('click', (e) => {
+		const todoContainer = document.querySelector('.todo-container');
+			todoContainer.addEventListener('click', (e) => {
 				let target = e.target;
 				if(target.matches('.todo-remove')){
-					let key = elem.key;
-					this.deleteItem(key, todoItem);
+					let key = target.offsetParent.offsetParent.key;
+					this.deleteItem(key);
 				}
 				else if(target.matches('.todo-complete')){
-					let key = elem.key;
+					let key = target.offsetParent.offsetParent.key;
 					this.complaetedItem(key);
 				}
 			});
-		});
 	}
 
 	init(){
