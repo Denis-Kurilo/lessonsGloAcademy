@@ -19,7 +19,7 @@ window.addEventListener('DOMContentLoaded', function(){
 			return{timeRemaining, hours, minutes, seconds};
 		}
 		function updateClock(){
-			let timer = getTimeRemaining();
+			let timer = getTimeRemaining(); 
 			if(timer.timeRemaining > 0){
 				timerHours.textContent = timer.hours;
 				timerMinutes.textContent = timer.minutes;
@@ -283,4 +283,34 @@ window.addEventListener('DOMContentLoaded', function(){
 	};
 	slider();
 
+	//calculate
+	const calculate = () =>{
+		const calcBlock = document.querySelector('.calc-block');
+		calcBlock.addEventListener('input', (e) =>{
+			let target = e.target.closest('input');
+			if(target){
+				let input = target.value;
+				input = target.value = input.replace(/\D/g, '');
+			}
+		});
+	}
+	calculate();
+
+	//Our team
+	const team = () =>{
+		const command = document.getElementById('command');
+		command.addEventListener('mouseover', (e) =>{
+			let target = e.target;
+			if(target.closest('img')){
+				target.src = target.dataset.img;
+			}
+		});
+		command.addEventListener('mouseout', (e) =>{
+			let target = e.target;
+			if(target.closest('img')){
+				target.src = target.src.replace(/a(?=.jpg)/g, "");
+			}
+		});
+	}
+	team();
 });
