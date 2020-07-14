@@ -1,7 +1,7 @@
 window.addEventListener('DOMContentLoaded', function(){
 	'use strict';
 	let count = 0;
-	let animateModal;
+	let animateModal; 
  
 	//Timer
 	function countTimer(deadline){
@@ -284,8 +284,14 @@ window.addEventListener('DOMContentLoaded', function(){
 	slider();
 
 	//calculate
-	const calculate = () =>{
-		const calcBlock = document.querySelector('.calc-block');
+	const calculate = (price = 100) =>{
+		const calcBlock = document.querySelector('.calc-block'),
+			calcType = document.querySelector('.calc-type'),
+			calcSquare = document.querySelector('.calc-square'),
+			calcCount = document.querySelector('.calc-count'),
+			calcDay = document.querySelector('.calc-day'),
+			totalValue = document.getElementById('total');
+
 		calcBlock.addEventListener('input', (e) =>{
 			let target = e.target;
 			if(target.closest('input')){
@@ -293,14 +299,104 @@ window.addEventListener('DOMContentLoaded', function(){
 				target.value = input.replace(/\D/g, '');
 			}
 		});
+
+		const countSum = () =>{
+			let total = 0,
+			countValue = 1,
+			dayValue = 1;
+			const typeValue = calcType.options[calcType.selectedIndex].value,
+				 squareValue = +calcSquare.value;
+			
+			if(calcCount.value > 1){
+				countValue += (calcCount.value -1) / 10;
+			}
+
+			if(calcDay.value && calcDay.value < 5){
+				dayValue *= 2;
+			} else if(calcDay.value && calcDay.value < 10){
+				dayValue *= 1.5;
+			}
+
+			if(typeValue && squareValue){
+				total = price * typeValue * squareValue * countValue * dayValue;
+			}
+			totalValue.textContent = total;
+		};
+
+		calcBlock.addEventListener('change', (event) =>{
+			const target = event.target;
+
+			if(target.matches('select') || target.matches('input')){
+				countSum();
+			}
+		});
 	}
-	calculate();
+	calculate(100);
+
+	//send-ajax-form
+	const sendForm = () => {
+		const errorMessage = 'Что то пошло не так',
+			loadMessage = 'Загрузка...',
+			successMessage = 'Спасибо! Мы скоро с вами свяжемся!';
+
+		const form = document.getElementById('form1');
+
+		const statusMessage = document.createElement('div');
+		statusMessage.style.cssText = 'font-size: 2rem;';
+		// form.appendChild(statusMessage);
+
+		form.addEventListener('submit', (event) => {
+			event.preventDefault();
+			let target = event.target;
+			console.log(target)
+			form.appendChild(statusMessage);
+
+			statusMessage.textContent = loadMessage;
+			const formData = new FormData(form);
+			let body = {};
+			/*for(let val of formData.entries()){
+				body[val[0]] = val[1];
+			}*/
+			formData.forEach((val, key) => {
+				body[key] = val;
+			});
+			postData(body, () => {
+				statusMessage.textContent = successMessage;
+			
+			}, (error) => {
+				statusMessage.textContent = errorMessage;
+				console.error(error);
+			});
+		
+		}); 
+		const postData = (body, outputData, errorData) => {
+			const request = new XMLHttpRequest();
+
+			request.addEventListener('readystatechange', () => {
+				if(request.readyState !== 4){
+					return;
+				}
+				if(request.status === 200){
+					outputData();
+				}else{
+					errorData();
+				}
+			});
+
+			request.open('POST', './server.php');
+			request.setRequestHeader('Content-Type', 'application/json');
+			
+
+			request.send(JSON.stringify(body));
+		}
+	}
+	sendForm();
 
 	//Our team
 	const team = () =>{
 		const command = document.getElementById('command');
 		command.addEventListener('mouseover', (e) =>{
-			let target = e.target;
+			const target = e.target;
 			if(target.closest('img')){
 				target.src = target.dataset.img;
 			}
