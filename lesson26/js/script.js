@@ -43,7 +43,7 @@ window.addEventListener('DOMContentLoaded', function(){
 		setInterval(updateClock, 1000)
 		updateClock();		
 	};
-	countTimer('12 july 2020');
+	countTimer('20 july 2021');
 
 	//menu
 	const toggleMenu = () =>{
@@ -281,7 +281,7 @@ window.addEventListener('DOMContentLoaded', function(){
 
 			startSlide(4000);
 	};
-	slider();
+	slider(); 
 
 	//calculate
 	const calculate = (price = 100) =>{
@@ -339,24 +339,21 @@ window.addEventListener('DOMContentLoaded', function(){
 			loadMessage = 'Загрузка...',
 			successMessage = 'Спасибо! Мы скоро с вами свяжемся!';
 
-		const form = document.getElementById('form1');
+		const form = document.getElementById('form1'),
+				 form2 = document.getElementById('form2'),
+				 form3 = document.getElementById('form3');
 
 		const statusMessage = document.createElement('div');
 		statusMessage.style.cssText = 'font-size: 2rem;';
-		// form.appendChild(statusMessage);
 
+		//form1
 		form.addEventListener('submit', (event) => {
 			event.preventDefault();
-			let target = event.target;
-			console.log(target)
 			form.appendChild(statusMessage);
 
 			statusMessage.textContent = loadMessage;
 			const formData = new FormData(form);
 			let body = {};
-			/*for(let val of formData.entries()){
-				body[val[0]] = val[1];
-			}*/
 			formData.forEach((val, key) => {
 				body[key] = val;
 			});
@@ -366,9 +363,49 @@ window.addEventListener('DOMContentLoaded', function(){
 			}, (error) => {
 				statusMessage.textContent = errorMessage;
 				console.error(error);
-			});
-		
+			});		
 		}); 
+
+		//form2
+		form2.addEventListener('submit', (event) => {
+			event.preventDefault();
+			form2.appendChild(statusMessage);
+
+			statusMessage.textContent = loadMessage;
+			const formData = new FormData(form2);
+			let body = {};
+			formData.forEach((val, key) => {
+				body[key] = val;
+			});
+			postData(body, () => {
+				statusMessage.textContent = successMessage;
+			
+			}, (error) => {
+				statusMessage.textContent = errorMessage;
+				console.error(error);
+			});		
+		}); 
+
+		//form3
+		form3.addEventListener('submit', (event) => {
+			event.preventDefault();
+			form3.appendChild(statusMessage);
+
+			statusMessage.textContent = loadMessage;
+			const formData = new FormData(form3);
+			let body = {};
+			formData.forEach((val, key) => {
+				body[key] = val;
+			});
+			postData(body, () => {
+				statusMessage.textContent = successMessage;
+			
+			}, (error) => {
+				statusMessage.textContent = errorMessage;
+				console.error(error);
+			});		
+		}); 
+
 		const postData = (body, outputData, errorData) => {
 			const request = new XMLHttpRequest();
 
@@ -378,6 +415,22 @@ window.addEventListener('DOMContentLoaded', function(){
 				}
 				if(request.status === 200){
 					outputData();
+					if(form){
+						form[0].value = '';	
+						form[1].value = '';	
+						form[2].value = '';	
+					}
+					if(form2){
+						form2[0].value = '';	
+						form2[1].value = '';	
+						form2[2].value = '';	
+						form2[3].value = '';	
+					}
+					if(form3){
+						form3[0].value = '';	
+						form3[1].value = '';	
+						form3[2].value = '';	
+					}
 				}else{
 					errorData();
 				}
@@ -391,6 +444,47 @@ window.addEventListener('DOMContentLoaded', function(){
 		}
 	}
 	sendForm();
+
+	//phone Validation
+	const validationForm = () =>{
+		const form1 = document.getElementById('form1'),
+			form2 = document.getElementById('form2'),
+			form3 = document.getElementById('form3');
+			
+		maskPhone('#form1-phone');
+		maskPhone('#form2-phone');
+		maskPhone('#form3-phone');
+
+		form1.addEventListener('input', (e)  =>{
+			let target = e.target;
+			if(target.matches('#form1-name')){
+				let input = target.value;
+				target.value = input.replace(/(^[a-zA-Z0-9*]*$)/gi, '');
+			}else if(target.matches('#form1-phone')){
+				target.setAttribute('maxlength', '18');
+			}
+		});
+		form2.addEventListener('input', (e)  =>{
+			let target = e.target;
+			if(target.matches('#form2-name') || 
+				target.matches('#form2-message')){
+				let input = target.value;
+				target.value = input.replace(/(^[a-zA-Z0-9*]*$)/gi, '');
+			}else if(target.matches('#form2-phone')){
+				target.setAttribute('maxlength', '18');
+			}
+		});
+		form3.addEventListener('input', (e)  =>{
+			let target = e.target;
+			if(target.matches('#form3-name')){
+				let input = target.value;
+				target.value = input.replace(/(^[a-zA-Z0-9*]*$)/gi, '');
+			}else if(target.matches('#form3-phone')){
+				target.setAttribute('maxlength', '18');
+			}
+		});
+	}
+	validationForm();
 
 	//Our team
 	const team = () =>{

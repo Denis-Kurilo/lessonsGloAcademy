@@ -77,7 +77,7 @@
 					<input type="email" class="form-email" id="form1-email" name="user_email" placeholder="E-mail">
 				</div>
 				<div class="col-12 col-lg-4">
-					<input type="tel" class="form-phone" id="form1-phone" name="user_phone" placeholder="Номер телефона" required>
+					<input type="text" class="form-phone" id="form1-phone" name="user_phone" placeholder="Номер телефона" required>
 				</div>
 			</div>
 		</div>
@@ -409,32 +409,7 @@
 		</div>
 	</div>
 </div>
-<script src="js/plagins/validator/validator.js"></script>
+<script src="js/maskPhone.js"></script>
 <script src="js/script.js"></script>
-<script>
-	const valid = new Validator({
-		selector: '#form1',
-		pattern: {
-			// phone: /^\d+$/;
-			// 'form2-name': /^[\D]$/gi
-		},
-		method: {
-			'form1-name': [
-				['notEmpty'],
-				['pattern', 'name']
-			],
-			'form1-email': [
-				['notEmpty'],
-				['pattern', 'email']
-			],
-			'form1-phone': [
-				['notEmpty'],
-				['pattern', 'phone']
-			],
-			
-		}
-	});
-	valid.init();
-</script>
 </body>
 </html>
