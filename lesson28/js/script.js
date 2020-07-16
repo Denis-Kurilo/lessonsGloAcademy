@@ -1,7 +1,7 @@
 window.addEventListener('DOMContentLoaded', function(){
 	'use strict';
 	let count = 0;
-	let animateModal; 
+	let animateModal;  
  
 	//Timer
 	function countTimer(deadline){
@@ -406,44 +406,51 @@ window.addEventListener('DOMContentLoaded', function(){
 			});		
 		}); 
 
-		const postData = (body, outputData, errorData) => {
-			const request = new XMLHttpRequest();
+		const postData = (body) => {
+			return new Promise((resolve, reject) => {
+        const request = new XMLHttpRequest();
+        request.addEventListener('readystatechange', () => {
+          if(request.readyState !== 4){
+            return;
+          }
+          if(request.status === 200){
+            const response = JSON.parse(request.responseText);
+            resolve(response);
+            if(form){
+              form[0].value = ''; 
+              form[1].value = ''; 
+              form[2].value = ''; 
+            }
+            if(form2){
+              form2[0].value = '';  
+              form2[1].value = '';  
+              form2[2].value = '';  
+              form2[3].value = '';  
+            }
+            if(form3){
+              form3[0].value = '';  
+              form3[1].value = '';  
+              form3[2].value = '';  
+            }
+          }else{
+            reject(request.error);
+          }
+        });
 
-			request.addEventListener('readystatechange', () => {
-				if(request.readyState !== 4){
-					return;
-				}
-				if(request.status === 200){
-					outputData();
-					if(form){
-						form[0].value = '';	
-						form[1].value = '';	
-						form[2].value = '';	
-					}
-					if(form2){
-						form2[0].value = '';	
-						form2[1].value = '';	
-						form2[2].value = '';	
-						form2[3].value = '';	
-					}
-					if(form3){
-						form3[0].value = '';	
-						form3[1].value = '';	
-						form3[2].value = '';	
-					}
-				}else{
-					errorData();
-				}
+        request.open('POST', './server.php');
+        request.setRequestHeader('Content-Type', 'application/json');
+        request.send(JSON.stringify(body));
 			});
-
-			request.open('POST', './server.php');
-			request.setRequestHeader('Content-Type', 'application/json');
-			
-
-			request.send(JSON.stringify(body));
 		}
 	}
-	sendForm();
+	postData(body)
+    .then(() => {
+      statusMessage.textContent = successMessage;
+    })
+    .catch(error => {
+      statusMessage.textContent = errorMessage;
+      console.error(error);
+    });
 
 	//phone Validation
 	const validationForm = () =>{
