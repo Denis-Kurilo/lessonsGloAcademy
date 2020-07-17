@@ -347,15 +347,16 @@ window.addEventListener('DOMContentLoaded', function(){
     statusMessage.style.cssText = 'font-size: 2rem;';
 
     const postData = (body) => {
-      return new Promise((resolve, reject) => {
-        const request = new XMLHttpRequest();
-        request.addEventListener('readystatechange', () => {
-          if(request.readyState !== 4){
-            return;
-          }
-          if(request.status === 200){
-            resolve(request);
-            if(form){
+    	return fetch('./server.php', {
+    		method: 'POST',
+    		headers: {
+    			'Content-Type': 'application/json'
+    		},
+    		body: JSON.stringify(body)
+    	});
+    }
+    const inputMaxLength = () => {
+						if(form){
               form[0].value = ''; 
               form[1].value = ''; 
               form[2].value = ''; 
@@ -371,17 +372,8 @@ window.addEventListener('DOMContentLoaded', function(){
               form3[1].value = '';  
               form3[2].value = '';  
             }
-          }else{
-            reject(request.error);
-          }
-        });
-
-        request.open('POST', './server.php');
-        request.setRequestHeader('Content-Type', 'application/json');
-        request.send(JSON.stringify(body));
-      });
-    }
-
+    	}
+    	
    //form1
     form.addEventListener('submit', (event) => {
       event.preventDefault();
@@ -395,7 +387,13 @@ window.addEventListener('DOMContentLoaded', function(){
       });   
     
       postData(body)
-        .then((request) => {
+        .then((response) => {
+        	if(response.status !== 200){
+        		throw new Error('status network not 200.');
+        	}
+        	if(response.status == 200){
+        		inputMaxLength();
+        	}
           statusMessage.textContent = successMessage;
         })
         .catch(error => {
@@ -417,7 +415,13 @@ window.addEventListener('DOMContentLoaded', function(){
       });   
     
       postData(body)
-        .then((request) => {
+        .then((response) => {
+        	if(response.status !== 200){
+        		throw new Error('status network not 200.');
+        	}
+        	if(response.status == 200){
+        		inputMaxLength();
+        	}
           statusMessage.textContent = successMessage;
         })
         .catch(error => {
@@ -439,7 +443,13 @@ window.addEventListener('DOMContentLoaded', function(){
       });   
     
       postData(body)
-        .then((request) => {
+        .then((response) => {
+        	if(response.status !== 200){
+        		throw new Error('status network not 200.');
+        	}
+        	if(response.status == 200){
+        		inputMaxLength();
+        	}
           statusMessage.textContent = successMessage;
         })
         .catch(error => {
@@ -449,7 +459,7 @@ window.addEventListener('DOMContentLoaded', function(){
     });
   }
   sendForm();
-
+  
 	//phone Validation
 	const validationForm = () =>{
 		const form1 = document.getElementById('form1'),
