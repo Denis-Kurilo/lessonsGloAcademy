@@ -27,14 +27,14 @@ function maskPhone(selector, masked = '+7 (___) ___-__-__') {
 			this.value = "";
 		}
 
-	}
+	};
 
 	for (const elem of elems) {
 		elem.addEventListener("input", mask);
 		elem.addEventListener("focus", mask);
 		elem.addEventListener("blur", mask);
-	}
-}
+	};
+};
 
 // use
 
