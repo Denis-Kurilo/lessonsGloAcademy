@@ -1,5 +1,4 @@
 'use strict';
-	
 	import "formdata-polyfill";
 	import "es6-promise";
 	import "fetch-polyfill";
@@ -18,36 +17,24 @@
 	import sendForm from '../src/modules/sendForm';
 	import validationForm from '../src/modules/validationForm';
 	import team from '../src/modules/team';
- 
+
 	//Timer
 	countTimer('20 july 2021');
-
 	//menu
 	toggleMenu();
-
-	//animation popUp
-	// animationPopUp();
-
 	//popup
 	togglePopUp();
-
 	//scroll-down
 	scrollDown();
-
 	//tabs
 	tabs();
-
 	//slider
 	slider(); 
-
 	//calculate
 	calculate(100);
-
 	//send-ajax-form
   	sendForm();
-  
 	//phone Validation
 	validationForm();
-
 	//Our team
 	team();
