@@ -3,9 +3,9 @@ const validationForm = () =>{
 		form2 = document.getElementById('form2'),
 		form3 = document.getElementById('form3');
 		
-	maskPhone('#form1-phone');
+	/*maskPhone('#form1-phone');
 	maskPhone('#form2-phone');
-	maskPhone('#form3-phone');
+	maskPhone('#form3-phone');*/
 
 	form1.addEventListener('input', (e)  =>{
 		let target = e.target;

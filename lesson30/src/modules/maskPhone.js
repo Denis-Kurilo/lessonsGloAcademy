@@ -1,4 +1,4 @@
-function maskPhone(selector, masked = '+7 (___) ___-__-__') {
+function maskPhone(selector, masked = "+7 (___) ___-__-__") {
 	const elems = document.querySelectorAll(selector);
 
 	function mask(event) {
@@ -36,6 +36,7 @@ function maskPhone(selector, masked = '+7 (___) ___-__-__') {
 	};
 };
 
-// use
-
-maskPhone('селектор элементов', 'маска, если маску не передать то будет работать стандартная +7 (___) ___-__-__');
+maskPhone('#form1-phone');
+maskPhone('#form2-phone');
+maskPhone('#form3-phone');
+export default maskPhone;
