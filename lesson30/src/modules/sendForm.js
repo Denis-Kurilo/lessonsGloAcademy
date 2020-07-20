@@ -8,7 +8,11 @@ const sendForm = () => {
 	     form3 = document.getElementById('form3');
 
 	const statusMessage = document.createElement('div');
-	statusMessage.style.cssText = 'font-size: 2rem;';
+	statusMessage.style.cssText = 'font-size: 2rem; color: white';
+
+	setTimeout(() => {
+		statusMessage.textContent = successMessage;
+	}, 5000); 
 
 	const postData = (body) => {
 		return fetch('./server.php', {
@@ -59,6 +63,9 @@ const sendForm = () => {
 	    		inputMaxLength();
 	    	}
 	      statusMessage.textContent = successMessage;
+	      setTimeout(() => {
+	      	 statusMessage.textContent = '';
+	      }, 3000);
 	    })
 	    .catch(error => {
 	      statusMessage.textContent = errorMessage;
@@ -87,6 +94,9 @@ const sendForm = () => {
 	    		inputMaxLength();
 	    	}
 	      statusMessage.textContent = successMessage;
+	      setTimeout(() => {
+	      	 statusMessage.textContent = '';
+	      }, 3000);
 	    })
 	    .catch(error => {
 	      statusMessage.textContent = errorMessage;
@@ -115,6 +125,9 @@ const sendForm = () => {
 	    		inputMaxLength();
 	    	}
 	      statusMessage.textContent = successMessage;
+	      setTimeout(() => {
+	      	 statusMessage.textContent = '';
+	      }, 3000);
 	    })
 	    .catch(error => {
 	      statusMessage.textContent = errorMessage;
